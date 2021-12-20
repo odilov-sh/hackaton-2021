@@ -7,6 +7,7 @@ $params = array_merge(
     require __DIR__ . '/params.php'
 );
 return [
+    'homeUrl' => '/doctor',
     'components' => [
         'assetManager' => [
             'class' => 'yii\web\AssetManager',
