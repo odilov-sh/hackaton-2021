@@ -5,7 +5,7 @@
 /* @var $model common\models\Reception */
 
 $this->title = Yii::t('site', 'Create a new');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Receptions'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Qabul'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
