@@ -10,9 +10,9 @@ use soft\widget\adminlte3\Card;
 
 ?>
 
-<?php Card::begin()  ?>
+<?php Card::begin() ?>
 
-<h4 align="center" class="text-primary"> <i class="fas fa-user"></i> Yangi mijoz qo'shish</h4>
+<h4 align="center" class="text-primary"><i class="fas fa-user"></i> Yangi mijoz qo'shish</h4>
 
 <?php $form = ActiveForm::begin(); ?>
 
@@ -22,11 +22,10 @@ use soft\widget\adminlte3\Card;
     'initCard' => false,
     'columns' => 2,
     'attributes' => [
-        'username',
-        'status',
         'firstname',
         'lastname',
-        'type_id',
+        'middlename',
+        'passport',
     ]
 ]); ?>
 <div class="form-group">
@@ -35,4 +34,4 @@ use soft\widget\adminlte3\Card;
 
 <?php ActiveForm::end(); ?>
 
-<?php Card::end()  ?>
+<?php Card::end() ?>

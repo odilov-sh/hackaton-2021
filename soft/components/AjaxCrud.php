@@ -7,6 +7,7 @@ use soft\helpers\ArrayHelper;
 use Yii;
 use soft\web\SoftController;
 use soft\helpers\Html;
+use yii\base\Model;
 use yii\web\Response;
 
 /**
@@ -190,7 +191,7 @@ class AjaxCrud extends \yii\base\Component
 
 
     /**
-     * @param $model ActiveRecord
+     * @param $model Model
      * @param array $params
      * @param array $viewParams
      * @return array|string
@@ -240,7 +241,7 @@ class AjaxCrud extends \yii\base\Component
     }
 
     /**
-     * @param $model ActiveRecord
+     * @param $model Model
      * @param array $params. Quyidagilar params ichida bo'lish mumkin:
      *  - view - string - defaults to `update`
      *  - forceClose - bool - defaults to `true`
@@ -322,7 +323,7 @@ class AjaxCrud extends \yii\base\Component
     }
 
     /**
-     * @param $model ActiveRecord
+     * @param $model Model
      * @param array $params. Quyidagilar params ichida bo'lish mumkin:
      *  - view - string - defaults to `create`
      *  - forceClose - bool - defaults to `true`
