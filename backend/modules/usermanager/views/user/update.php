@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model backend\modules\usermanager\models\User */
 
 $this->title = Yii::t('site', 'Update');
-$this->params['breadcrumbs'][] = ['label' => 'Xodimlar', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Doktorlar', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->firstname, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

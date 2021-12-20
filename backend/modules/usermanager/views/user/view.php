@@ -5,7 +5,7 @@
 /* @var $model backend\modules\usermanager\models\User */
 
 $this->title = $model->fullname;
-$this->params['breadcrumbs'][] = ['label' => 'Xodimlar', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Doktorlar', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -18,7 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'username',
         'firstname',
         'lastname',
-        'branch.name',
         'typeName',
         'status:status',
         'created_at',

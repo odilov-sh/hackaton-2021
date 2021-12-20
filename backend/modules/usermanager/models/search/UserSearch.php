@@ -13,7 +13,7 @@ class UserSearch extends User
     public function rules()
     {
         return [
-            [['id', 'status', 'created_at', 'updated_at', 'branch_id', 'type_id'], 'integer'],
+            [['id', 'status', 'created_at', 'updated_at', 'type_id'], 'integer'],
             [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'firstname', 'lastname'], 'safe'],
         ];
     }
@@ -32,10 +32,7 @@ class UserSearch extends User
         }
         if ($query == null) {
             $query = User::find()
-                ->andWhere(['!=', 'id', 1])
-                ->andWhere(['!=', 'is_deleted', '1'])
-                ->with('branch')
-            ;
+                ->andWhere(['!=', 'id', 1]);
         }
 
         $dataProvider = new ActiveDataProvider([
@@ -56,9 +53,7 @@ class UserSearch extends User
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'branch_id' => $this->branch_id,
             'type_id' => $this->type_id,
-
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])

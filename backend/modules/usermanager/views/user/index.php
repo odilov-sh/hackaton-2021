@@ -7,10 +7,9 @@ use common\models\Branch;
 /* @var $searchModel backend\modules\usermanager\models\search\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Xodimlar';
+$this->title = 'Doktorlar';
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerAjaxCrudAssets();
-$branches_map = map(Branch::find()->all(), 'id', 'name');
 ?>
 <?= \soft\grid\GridView::widget([
     'id' => 'crud-datatable',
@@ -26,26 +25,21 @@ $branches_map = map(Branch::find()->all(), 'id', 'name');
             'icon' => 'user-plus,fas'
         ]
     ],
-    'cols' => [
-        'username',
+    'columns' => [
+        [
+            'attribute' => 'username',
+        ],
         'firstname',
         'lastname',
         [
             'attribute' => 'type_id',
             'format' => 'raw',
             'value' => 'typeName',
-            'filter' => User::types()
-        ],
-        [
-            'attribute' => 'branch_id',
-            'format' => 'raw',
-            'value' => 'branch.name',
-            'label' => 'Filial nomi',
-            'filter' => $branches_map,
+//            'filter' => User::types()
         ],
         [
             'attribute' => 'status',
-            'filter' => User::statuses(),
+//            'filter' => User::statuses(),
             'format' => 'raw',
             'value' => function ($model) {
                 /** @var User $model */
