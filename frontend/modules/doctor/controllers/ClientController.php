@@ -2,6 +2,8 @@
 
 namespace frontend\modules\doctor\controllers;
 
+use backend\modules\regionmanager\actions\DistrictsAction;
+use backend\modules\regionmanager\actions\QuartersAction;
 use Yii;
 use frontend\modules\doctor\models\Client;
 use frontend\modules\doctor\models\search\ClientSearch;
@@ -34,6 +36,18 @@ class ClientController extends SoftController
                     ],
                 ],
             ]
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'districts' => [
+                'class' => DistrictsAction::class,
+            ],
+            'quarters' => [
+                'class' => QuartersAction::class,
+            ],
         ];
     }
 
@@ -74,6 +88,7 @@ class ClientController extends SoftController
     {
         $model = new Client();
         $model->scenario = Client::SCENARIO_DOCTOR_FORM;
+        $model->doctor_id = Yii::$app->user->getId();
         return $this->ajaxCrud->createAction($model);
     }
 

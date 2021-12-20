@@ -1,5 +1,7 @@
 <?php
 
+use backend\modules\regionmanager\models\Region;
+use kartik\depdrop\DepDrop;
 use soft\helpers\Html;
 use soft\widget\kartik\ActiveForm;
 use soft\widget\kartik\Form;
@@ -20,12 +22,53 @@ use soft\widget\adminlte3\Card;
     'model' => $model,
     'form' => $form,
     'initCard' => false,
-    'columns' => 2,
+    'columns' => 3,
     'attributes' => [
         'firstname',
         'lastname',
         'middlename',
-        'passport',
+//        'passport',
+        'region_id:select2' => [
+            'options' => [
+                'data' => Region::map(),
+                'options' => [
+                    'id' => 'region-id'
+                ]
+            ]
+
+        ],
+        'district_id:widget' => [
+            'widgetClass' => DepDrop::class,
+            'options' => [
+                'type' => DepDrop::TYPE_SELECT2,
+                'options' => [
+                    'id' => 'district-id',
+                    'placeholder' => 'Tuman/shaharni tanlang...',
+                    'required' => true,
+                ],
+                'pluginOptions' => [
+                    'depends' => ['region-id'],
+                    'url' => to(['districts']),
+                    'placeholder' => 'Tuman/shaharni tanlang...',
+                ]
+            ]
+        ],
+        'quarter_id:widget' => [
+            'widgetClass' => DepDrop::class,
+            'options' => [
+                'type' => DepDrop::TYPE_SELECT2,
+                'options' => [
+                    'id' => 'quarter-id',
+                    'placeholder' => 'Hududni tanlang...',
+                    'required' => true,
+                ],
+                'pluginOptions' => [
+                    'depends' => ['district-id'],
+                    'url' => to(['quarters']),
+                    'placeholder' => 'Hududni tanlang...',
+                ]
+            ]
+        ],
     ]
 ]); ?>
 <div class="form-group">

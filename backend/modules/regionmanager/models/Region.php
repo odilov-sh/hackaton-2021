@@ -72,4 +72,9 @@ class Region extends \yii\db\ActiveRecord
 //        }
         return $this->name_uz;
     }
+
+    public static function map()
+    {
+        return map(static::find()->all(), 'id', 'name');
+    }
 }
