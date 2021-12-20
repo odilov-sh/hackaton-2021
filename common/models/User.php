@@ -92,37 +92,12 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
-    const TYPE_MANAGER = 2;
-    const TYPE_CONSULTANT = 3;
+    const TYPE_ADMIN = 1;
+    const TYPE_DOCTOR = 2;
+    const TYPE_CLIENT = 3;
 
-    /**
-     * Admin tomonidan filiallar uchun xodim (menejer va konsultantlar)
-     * qo'shishda kerak bo'ladi
-     */
-    const SCENARIO_CREATE_BY_ADMIN = 'create_by_admin';
-
-    /**
-     * Admin tomonidan filiallardagi xodim (menejer va konsultantlar)ni
-     * tahrirlashda kerak bo'ladi
-     */
-    const SCENARIO_UPDATE_BY_ADMIN = 'update_by_admin';
-
-    /**
-     * Menejer tomonidan o'zining filialiga konsultantlar
-     * qo'shishda kerak bo'ladi
-     */
-    const SCENARIO_CREATE_BY_MANAGER = 'manager';
-
-    /**
-     * Menejer tomonidan o'zining filialidagi konsultantlarni
-     * tahrirlashda kerak bo'ladi
-     */
-    const SCENARIO_UPDATE_BY_MANAGER = 'update_by_admin';
-
-    /**
-     * Foy.chilar o'zining shaxsiy ma'lumotlarini tahrirlashda ishlaydi
-     */
-    const SCENARIO_PERSONAL = 'personal';
+    const GENDER_MALE = 1;
+    const GENDER_FEMALE = 2;
 
     public $password;
 
@@ -159,15 +134,10 @@ class User extends ActiveRecord implements IdentityInterface
 
             ['password', 'string', 'min' => 5],
             ['password', 'trim'],
-            ['password', 'required', 'on' => [self::SCENARIO_CREATE_BY_ADMIN, self::SCENARIO_CREATE_BY_MANAGER]],
 
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
 
-            ['type_id', 'integer'],
-            ['branch_id', 'required', 'on' => [self::SCENARIO_CREATE_BY_ADMIN, self::SCENARIO_UPDATE_BY_ADMIN]],
-            ['branch_id', 'integer'],
-            ['type_id', 'in', 'range' => array_keys(self::types())],
         ];
     }
 
@@ -186,16 +156,6 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
-    public function scenarios()
-    {
-        $scenarios = parent::scenarios();
-        $scenarios[self::SCENARIO_CREATE_BY_ADMIN] = ['firstname', 'lastname', 'username', 'password', 'status', 'type_id', 'branch_id'];
-        $scenarios[self::SCENARIO_UPDATE_BY_ADMIN] = ['firstname', 'lastname', 'username', 'password', 'status', 'type_id', 'branch_id'];
-        $scenarios[self::SCENARIO_CREATE_BY_MANAGER] = ['firstname', 'lastname', 'username', 'password', 'status'];
-        $scenarios[self::SCENARIO_UPDATE_BY_MANAGER] = ['firstname', 'lastname', 'username', 'password', 'status'];
-        return $scenarios;
-    }
-
     /**
      * @return \common\models\query\UserQuery|\yii\db\ActiveQuery
      * @throws \yii\base\InvalidConfigException
@@ -203,6 +163,23 @@ class User extends ActiveRecord implements IdentityInterface
     public static function find()
     {
         return Yii::createObject(UserQuery::class, [get_called_class()]);
+    }
+
+    public function beforeDelete()
+    {
+        if (!parent::beforeDelete()) {
+            return false;
+        }
+
+        $this->is_deleted = 1;
+        $this->deleted_at = time();
+        $this->deleted_by = Yii::$app->user->getId();
+        $this->status = self::STATUS_INACTIVE;
+        $this->auth_key = Yii::$app->security->generateRandomString();
+        $this->save(false);
+
+        return false;
+
     }
 
     //</editor-fold>
@@ -411,15 +388,9 @@ class User extends ActiveRecord implements IdentityInterface
     public static function types()
     {
         return [
-            self::TYPE_MANAGER => 'Menejer',
-            self::TYPE_CONSULTANT => 'Konsultant',
-        ];
-    }
-
-    public static function typesConsultant()
-    {
-        return [
-            self::TYPE_CONSULTANT => 'Konsultant',
+            self::TYPE_ADMIN => 'Admin',
+            self::TYPE_DOCTOR => 'Doctor',
+            self::TYPE_CLIENT => 'Mijoz',
         ];
     }
 
@@ -428,46 +399,54 @@ class User extends ActiveRecord implements IdentityInterface
         return ArrayHelper::getArrayValue(self::types(), $this->type_id);
     }
 
-    public function getIsManager()
+    public function getIsDoctor()
     {
-        return $this->type_id == self::TYPE_MANAGER;
+        return $this->type_id == self::TYPE_DOCTOR;
     }
 
-    public function getIsConsultant()
+    public function getIsClient()
     {
-        return $this->type_id == self::TYPE_CONSULTANT;
+        return $this->type_id == self::TYPE_CLIENT;
     }
 
     //</editor-fold>
 
-    //<editor-fold desc="Branch" defaultstate="collapsed">
+    //<editor-fold desc="Gender" defaultstate="collapsed">
+
     /**
-     * @return \yii\db\ActiveQuery
+     * @return array
      */
-    public function getBranch()
+    public static function genders()
     {
-        return $this->hasOne(Branch::class, ['id' => 'branch_id']);
+        return [
+            self::GENDER_MALE => "Erkak",
+            self::GENDER_FEMALE => "Ayol",
+        ];
     }
 
+    /**
+     * @return mixed|null
+     */
+    public function getGenderName()
+    {
+        return ArrayHelper::getArrayValue(self::genders(), $this->gender_id);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsMale()
+    {
+        return $this->gender_id == self::GENDER_MALE;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsFemale()
+    {
+        return $this->gender_id == self::GENDER_FEMALE;
+    }
 
     //</editor-fold>
-
-
-    public function beforeDelete()
-    {
-        if (!parent::beforeDelete()) {
-            return false;
-        }
-
-        $this->is_deleted = 1;
-        $this->deleted_at = time();
-        $this->deleted_by = Yii::$app->user->getId();
-        $this->status = self::STATUS_INACTIVE;
-        $this->auth_key = Yii::$app->security->generateRandomString();
-        $this->save(false);
-
-        return false;
-
-
-    }
 }
