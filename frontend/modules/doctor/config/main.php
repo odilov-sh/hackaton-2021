@@ -44,7 +44,7 @@ return [
         ],
         'errorHandler' => [
             'class' => "yii\web\ErrorHandler",
-            'errorAction' => '/tutor/default/error',
+            'errorAction' => '/doctor/default/error',
         ],
     ],
     'params' => $params,

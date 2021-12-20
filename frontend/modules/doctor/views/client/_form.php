@@ -1,6 +1,7 @@
 <?php
 
 use backend\modules\regionmanager\models\Region;
+use common\models\User;
 use kartik\depdrop\DepDrop;
 use soft\helpers\Html;
 use soft\widget\kartik\ActiveForm;
@@ -9,6 +10,13 @@ use soft\widget\adminlte3\Card;
 
 /* @var $this soft\web\View */
 /* @var $model frontend\modules\doctor\models\Client */
+
+
+$districts = [];
+
+if (!empty($model->district_id)){
+
+}
 
 ?>
 
@@ -71,6 +79,14 @@ use soft\widget\adminlte3\Card;
                 ]
             ]
         ],
+        'street',
+        'house_number',
+        'gender_id:dropdownList' => [
+            'items' => User::genders(),
+            'options' => [
+                'prompt' => 'Tanlang...'
+            ]
+        ]
     ]
 ]); ?>
 <div class="form-group">

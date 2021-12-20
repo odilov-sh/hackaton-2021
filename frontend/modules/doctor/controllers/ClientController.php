@@ -89,7 +89,11 @@ class ClientController extends SoftController
         $model = new Client();
         $model->scenario = Client::SCENARIO_DOCTOR_FORM;
         $model->doctor_id = Yii::$app->user->getId();
-        return $this->ajaxCrud->createAction($model);
+        $model->type_id = Client::TYPE_CLIENT;
+        if ($this->modelSave($model)){
+            return $this->redirect(['client/view', 'id' => $model->id]);
+        }
+        return $this->render('create', ['model' => $model]);
     }
 
     /**

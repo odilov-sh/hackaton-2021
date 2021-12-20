@@ -2,8 +2,8 @@
 
 namespace common\models;
 
-use soft\behaviors\TimestampConvertorBehavior;
 use Yii;
+use soft\behaviors\TimestampConvertorBehavior;
 use common\models\query\UserQuery;
 use soft\helpers\ArrayHelper;
 use yii\base\NotSupportedException;
@@ -172,6 +172,13 @@ class User extends ActiveRecord implements IdentityInterface
             'doctor_type_id' => "Doktor turi",
             'phone' => "Telefon raqami",
             'status' => "Holati",
+            'region_id' => 'Viloyat',
+            'district_id' => 'Tuman',
+            'quarter_id' => 'Hudud',
+            'date_of_birth' => "Tug'ilgan sanasi",
+            'street' => "Ko'cha nomi",
+            'house_number' => 'Uy raqami',
+            'gender_id' => 'Jinsi'
         ];
     }
 
@@ -184,22 +191,17 @@ class User extends ActiveRecord implements IdentityInterface
         return Yii::createObject(UserQuery::class, [get_called_class()]);
     }
 
-//    public function beforeDelete()
-//    {
-//        if (!parent::beforeDelete()) {
-//            return false;
-//        }
-//
-//        $this->is_deleted = 1;
-//        $this->deleted_at = time();
-//        $this->deleted_by = Yii::$app->user->getId();
-//        $this->status = self::STATUS_INACTIVE;
-//        $this->auth_key = Yii::$app->security->generateRandomString();
-//        $this->save(false);
-//
-//        return false;
-//
-//    }
+
+    public function beforeSave($insert)
+    {
+        if(!parent::beforeSave($insert)){
+          return false;
+        }
+        if (empty($this->auth_key)){
+            $this->generateAuthKey();
+        }
+        return true;
+    }
 
     //</editor-fold>
 
