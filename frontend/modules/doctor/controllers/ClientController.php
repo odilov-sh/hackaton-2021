@@ -4,11 +4,12 @@ namespace frontend\modules\doctor\controllers;
 
 use backend\modules\regionmanager\actions\DistrictsAction;
 use backend\modules\regionmanager\actions\QuartersAction;
+use common\models\Reception;
+use http\Client\Curl\User;
 use Yii;
 use frontend\modules\doctor\models\Client;
 use frontend\modules\doctor\models\search\ClientSearch;
 use soft\web\SoftController;
-use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -152,24 +153,6 @@ class ClientController extends SoftController
     public function actionSearch()
     {
         return $this->render('search');
-    }
-    public function actionPechat($id){
-        $model=$this->findModel($id);
-        return $this->render('pechat',['model'=>$model]);
-    }
-    public function actionPechatView($client_id)
-    {
-        $client = $this->findModel($client_id);
-        $receptions = Yii::$app->request->post('selection');
-        if (empty($client) || empty($receptions)) {
-
-            throw new ForbiddenHttpException(Yii::t('app', 'The requested action does not exist.'));
-        }
-
-        return $this->render('pechat_view', [
-            'client' => $client,
-            'receptions' => $receptions
-        ]);
     }
 
 }
