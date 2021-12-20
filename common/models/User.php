@@ -24,16 +24,29 @@ use yii\web\IdentityInterface;
  * @property integer $updated_at
  * @property-read string $authKey
  * @property bool $type_id [tinyint(3)]
- * @property int $branch_id [int(11)]
  * @property string $firstname [varchar(255)]
  * @property string $lastname [varchar(255)]
+ * @property string $middlename [varchar(255)]
+ * @property int $region_id [int(11)]
+ * @property int $district_id [int(11)]
+ * @property int $quarter_id [int(11)]
+ * @property string $street [varchar(255)]
+ * @property string $house_number [varchar(255)]
+ * @property string $phone [varchar(255)]
+ * @property string $passport [varchar(255)]
+ * @property int $date_of_birth [int(11)]
+ * @property int $gender_id [int(11)]
+ * @property int $doctor_id [int(11)]
  *
  * @property-read mixed $statusName
  * @property-read string $statusBadge
  * @property-read string $fullname
  *
- * @property-read bool $isConsultant
- * @property-read bool $isManager
+ * @property-read null|mixed $genderName
+ * @property-read bool $isFemale
+ * @property-read bool $isClient
+ * @property-read bool $isDoctor
+ * @property-read bool $isMale
  * @property-read string $typeName
  *
  * @property string $Host [char(60)]
@@ -81,14 +94,7 @@ use yii\web\IdentityInterface;
  * @property int $password_last_changed [timestamp]
  * @property int $password_lifetime [smallint(5) unsigned]
  * @property string $account_locked [enum('N', 'Y')]
- * @property bool $is_deleted [tinyint(1)]
- * @property int $deleted_by [int(11)]
- * @property-read null|mixed $genderName
- * @property-read bool $isFemale
- * @property-read bool $isClient
- * @property-read bool $isDoctor
- * @property-read bool $isMale
- * @property int $deleted_at [int(11)]
+ *
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -151,13 +157,22 @@ class User extends ActiveRecord implements IdentityInterface
             'username' => 'Login',
             'firstname' => 'Ism',
             'lastname' => 'Familiya',
+            'middlename' => "Otasining ismi",
             'password' => 'Parol',
-            'branch_id' => 'Filial nomi',
             'type_id' => 'Xodim turi',
             'typeName' => 'Xodim turi',
             'created_at' => "Yaratildi",
             'updated_at' => "Tahrirlandi",
-        ];
+            'passport' => 'Pasport yoki metrka nomeri',
+            'date_of_birth' => "Tug'lgan sanasi",
+            'street' => "Ko'chasi",
+            "house_number" => 'Uy raqami',
+            'phone' => 'Telefon raqami',
+            'region_id' => 'Viloyat',
+            'district_id' => 'Tuman',
+            'quarter_id' => 'Hudud',
+            'gender_id' => 'Jinsi',
+         ];
     }
 
     /**

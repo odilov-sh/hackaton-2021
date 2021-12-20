@@ -56,7 +56,8 @@ class ClientController extends SoftController
      * Displays a single User model.
      * @param integer $id
      * @return string
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\web\NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
@@ -67,10 +68,12 @@ class ClientController extends SoftController
     /**
      * Creates a new User model.
      * @return string
+     * @throws \Exception
      */
     public function actionCreate()
     {
         $model = new Client();
+        $model->scenario = Client::SCENARIO_DOCTOR_FORM;
         return $this->ajaxCrud->createAction($model);
     }
 
@@ -78,11 +81,13 @@ class ClientController extends SoftController
      * Updates an existing User model.
      * @param integer $id
      * @return string
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\web\NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = Client::SCENARIO_DOCTOR_FORM;
         return $this->ajaxCrud->updateAction($model);
     }
 
@@ -90,7 +95,9 @@ class ClientController extends SoftController
      * Deletes an existing User model.
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\StaleObjectException
+     * @throws \yii\web\NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
@@ -99,26 +106,11 @@ class ClientController extends SoftController
     }
 
     /**
-     * Delete multiple existing User model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionBulkdelete()
-    {
-        $request = Yii::$app->request;
-        $pks = explode(',', $request->post('pks')); // Array or selected records primary keys
-        foreach ($pks as $pk) {
-            $model = $this->findModel($pk);
-            $model->delete();
-        }
-        return $this->ajaxCrud->closeModalResponse();
-    }
-
-    /**
      * Finds a single model for crud actions
      * @param $id
      * @return Client
-     * @throws yii\web\NotFoundHttpException
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\web\NotFoundHttpException
      */
     public function findModel($id)
     {
