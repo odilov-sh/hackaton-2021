@@ -1,6 +1,8 @@
 <?php
 
+use soft\grid\GridView;
 use soft\helpers\Html;
+use soft\helpers\Url;
 
 /* @var $this soft\web\View */
 /* @var $searchModel frontend\modules\doctor\models\search\ClientSearch */
@@ -10,7 +12,7 @@ $this->title = 'Mijozlar';
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerAjaxCrudAssets();
 ?>
-<?= \soft\grid\GridView::widget([
+<?= GridView::widget([
     'id' => 'crud-datatable',
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
@@ -29,8 +31,18 @@ $this->registerAjaxCrudAssets();
         'middlename',
         'date_of_birth:date',
         'passport',
-        'actionColumn' => [
-
-        ],
+        'actionColumn' =>
+            [
+                'template' => '{client} {view} {update} {delete}',
+                'buttons' =>
+                    [
+                        'client' => function ($url, $model, $key) {
+                            return Html::a('<i class="fas fa-notes-medical"></i>', [Url::to(['reception/create', 'client_id' => $model->id])], [
+                                'title' => 'Qabul',
+                                'data-pjax' => '0'
+                            ]);
+                        }
+                    ],
+            ],
     ],
 ]); ?>

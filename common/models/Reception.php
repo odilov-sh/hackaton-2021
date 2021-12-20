@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "reception".
@@ -36,7 +38,13 @@ class Reception extends \soft\db\ActiveRecord
     {
         return 'reception';
     }
-
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::class,
+            BlameableBehavior::class,
+        ];
+    }
     /**
     * {@inheritdoc}
     */
