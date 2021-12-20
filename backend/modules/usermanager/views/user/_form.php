@@ -2,8 +2,10 @@
 
 use backend\models\Client;
 use backend\models\DoctorType;
+use backend\modules\regionmanager\models\Region;
 use backend\modules\usermanager\models\User;
 use common\models\Branch;
+use kartik\widgets\DepDrop;
 use soft\helpers\Html;
 use soft\widget\input\VisiblePasswordInput;
 use soft\widget\kartik\ActiveForm;

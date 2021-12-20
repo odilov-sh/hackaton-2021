@@ -40,5 +40,4 @@ class User extends \common\models\User
 //        return true;
 //    }
 
-
 }
