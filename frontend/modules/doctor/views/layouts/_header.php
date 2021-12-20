@@ -22,7 +22,7 @@ $activeLanguage = ArrayHelper::remove($languages, $activeLanguage);
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item">
-            <a href="<?= can('worker') ? to(['default/index']) : to(['site/index']) ?>" class="nav-link"><i
+            <a href="<?= can('worker') ? to(['default/index']) : to(['/doctor']) ?>" class="nav-link"><i
                         class="fas fa-home"></i> Bosh sahifa</a>
         </li>
     </ul>

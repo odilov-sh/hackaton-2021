@@ -4,7 +4,11 @@ namespace frontend\modules\doctor\controllers;
 
 use backend\modules\regionmanager\actions\DistrictsAction;
 use backend\modules\regionmanager\actions\QuartersAction;
+use backend\modules\regionmanager\models\District;
+use backend\modules\regionmanager\models\search\DistrictSearch;
+use backend\modules\regionmanager\models\search\RegionSearch;
 use common\models\Reception;
+use common\models\search\ReceptionSearch;
 use http\Client\Curl\User;
 use Yii;
 use frontend\modules\doctor\models\Client;
@@ -155,4 +159,63 @@ class ClientController extends SoftController
         return $this->render('search');
     }
 
+    public function actionMyClient()
+    {
+
+        $searchModel = new ClientSearch();
+
+        $query = Client::find()
+            ->andWhere(['doctor_id' => Yii::$app->user->id]);
+
+        $dataProvider = $searchModel->search($query);
+
+        return $this->render('my_client', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionRegion()
+    {
+        $searchModel = new RegionSearch();
+        $dataProvider = $searchModel->search();
+
+        return $this->render('_region', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionDistrict()
+    {
+        $id = Yii::$app->request->get('id');
+
+        $searchModel = new DistrictSearch();
+        $query = District::find()
+            ->andWhere(['region_id' => $id]);
+
+        $dataProvider = $searchModel->search($query);
+
+        return $this->render('_district', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionDistrictClient()
+    {
+        $district_id = Yii::$app->request->get('id');
+
+        $searchModel = new ClientSearch();
+
+        $query = Client::find()
+            ->andWhere(['district_id' => $district_id]);
+
+        $dataProvider = $searchModel->search($query);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 }

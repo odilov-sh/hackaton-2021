@@ -6,6 +6,7 @@ $menuItems = [
     ['label' => "Bemorlar", 'url' => ['/doctor/client'], 'icon' => 'user',],
     ['label' => "Qabullar", 'url' => ['/doctor/reception'], 'icon' => 'clipboard-list,fas',],
     ['label' => "Mening bemorlarim", 'url' => ['/doctor/client/my-client'], 'icon' => 'users,fas',],
+    ['label' => "Hududlar bo'yicha", 'url' => ['/doctor/client/region'], 'icon' => 'globe,fas',],
 
 ];
 

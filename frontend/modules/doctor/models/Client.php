@@ -2,7 +2,9 @@
 
 namespace frontend\modules\doctor\models;
 
-class Client extends \common\models\User
+use common\models\User;
+
+class Client extends User
 {
 
     const SCENARIO_DOCTOR_FORM = 'doctorForm';

@@ -7,6 +7,8 @@
 
 namespace backend\modules\regionmanager\models;
 
+use backend\modules\usermanager\models\User;
+
 /**
  * This is the model class for table "district".
  *
@@ -95,4 +97,13 @@ class District extends \yii\db\ActiveRecord
         return map(static::find()->andWhere(['region_id' => $region_id])->all(), 'id', 'name');
     }
 
+    public function getDistrictClientCount()
+    {
+        $count = User::find()
+            ->andWhere(['district_id' => $this->id])
+            ->andWhere(['type_id' => User::TYPE_CLIENT])
+            ->count();
+
+        return $count;
+    }
 }

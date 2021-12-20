@@ -7,6 +7,9 @@
 
 namespace backend\modules\regionmanager\models;
 
+use backend\modules\usermanager\models\User;
+use common\models\Client;
+
 /**
  * This is the model class for table "region".
  *
@@ -76,5 +79,15 @@ class Region extends \yii\db\ActiveRecord
     public static function map()
     {
         return map(static::find()->all(), 'id', 'name');
+    }
+
+    public function getRegionClientCount()
+    {
+        $count = User::find()
+            ->andWhere(['region_id' => $this->id])
+            ->andWhere(['type_id' => User::TYPE_CLIENT])
+            ->count();
+
+        return $count;
     }
 }
