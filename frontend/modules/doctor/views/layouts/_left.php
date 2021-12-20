@@ -1,9 +1,10 @@
 <?php
 
-use common\models\Contract;
 
 $menuItems = [
     ['label' => "Bosh sahifa", 'url' => ['/site/index'], 'icon' => 'home',],
+    ['label' => "Qabul", 'url' => ['/doctor/reception'], 'icon' => 'user',],
+
 ];
 
 
