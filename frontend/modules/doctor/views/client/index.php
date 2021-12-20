@@ -23,12 +23,6 @@ $this->registerAjaxCrudAssets();
             'content' => "Yangi qo'shish"
         ]
     ],
-    'bulkButtonsTemplate' => '{delete}',
-    'bulkButtons' => [
-        'delete' => [
-            /** @see soft\widget\button\BulkButton for other configurations */
-        ],
-    ],
     'columns' => [
         'firstname',
         'lastname',
@@ -36,12 +30,7 @@ $this->registerAjaxCrudAssets();
         'date_of_birth:date',
         'passport',
         'actionColumn' => [
-            'viewOptions' => [
-                'role' => 'modal-remote',
-            ],
-            'updateOptions' => [
-                'role' => 'modal-remote',
-            ],
+
         ],
     ],
 ]); ?>
