@@ -3,6 +3,7 @@
 
 $menuItems = [
     ['label' => "Bosh sahifa", 'url' => ['/site/index'], 'icon' => 'home',],
+    ['label' => "Bemorlar", 'url' => ['/doctor/client'], 'icon' => 'user',],
     ['label' => "Qabul", 'url' => ['/doctor/reception'], 'icon' => 'user',],
 
 ];
