@@ -140,11 +140,12 @@ class User extends ActiveRecord implements IdentityInterface
             ['username', 'trim'],
             ['username', 'unique', 'message' => 'Ushbu login avvalroq band qilingan.'],
             [['username', 'firstname', 'type_id'], 'required'],
-            [['username', 'firstname', 'lastname'], 'string', 'max' => 255],
+            [['username', 'firstname', 'lastname', 'phone', 'middlename'], 'string', 'max' => 255],
 
             ['password', 'string', 'min' => 5],
             ['password', 'trim'],
 
+            [['doctor_type_id'], 'integer'],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
 
@@ -157,22 +158,16 @@ class User extends ActiveRecord implements IdentityInterface
             'username' => 'Login',
             'firstname' => 'Ism',
             'lastname' => 'Familiya',
-            'middlename' => "Otasining ismi",
+            'middlename' => 'Otasini Ismi',
             'password' => 'Parol',
             'type_id' => 'Xodim turi',
             'typeName' => 'Xodim turi',
             'created_at' => "Yaratildi",
             'updated_at' => "Tahrirlandi",
-            'passport' => 'Pasport yoki metrka nomeri',
-            'date_of_birth' => "Tug'lgan sanasi",
-            'street' => "Ko'chasi",
-            "house_number" => 'Uy raqami',
-            'phone' => 'Telefon raqami',
-            'region_id' => 'Viloyat',
-            'district_id' => 'Tuman',
-            'quarter_id' => 'Hudud',
-            'gender_id' => 'Jinsi',
-         ];
+            'doctor_type_id' => "Doktor turi",
+            'phone' => "Telefon raqami",
+            'status' => "Holati",
+        ];
     }
 
     /**
@@ -184,22 +179,22 @@ class User extends ActiveRecord implements IdentityInterface
         return Yii::createObject(UserQuery::class, [get_called_class()]);
     }
 
-    public function beforeDelete()
-    {
-        if (!parent::beforeDelete()) {
-            return false;
-        }
-
-        $this->is_deleted = 1;
-        $this->deleted_at = time();
-        $this->deleted_by = Yii::$app->user->getId();
-        $this->status = self::STATUS_INACTIVE;
-        $this->auth_key = Yii::$app->security->generateRandomString();
-        $this->save(false);
-
-        return false;
-
-    }
+//    public function beforeDelete()
+//    {
+//        if (!parent::beforeDelete()) {
+//            return false;
+//        }
+//
+//        $this->is_deleted = 1;
+//        $this->deleted_at = time();
+//        $this->deleted_by = Yii::$app->user->getId();
+//        $this->status = self::STATUS_INACTIVE;
+//        $this->auth_key = Yii::$app->security->generateRandomString();
+//        $this->save(false);
+//
+//        return false;
+//
+//    }
 
     //</editor-fold>
 

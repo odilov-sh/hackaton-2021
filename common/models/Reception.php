@@ -89,10 +89,6 @@ class Reception extends \soft\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'created_by']);
     }
-    
-    /**
-    * @return \yii\db\ActiveQuery
-    */
     public function getUpdatedBy0()
     {
         return $this->hasOne(User::className(), ['id' => 'updated_by']);

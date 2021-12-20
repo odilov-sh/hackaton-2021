@@ -1,6 +1,7 @@
 <?php
 
 use backend\models\Client;
+use backend\models\DoctorType;
 use backend\modules\usermanager\models\User;
 use common\models\Branch;
 use soft\helpers\Html;
@@ -21,7 +22,7 @@ if (!$model->isNewRecord) {
 ?>
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
 
         <?php $form = ActiveForm::begin(); ?>
 
@@ -30,16 +31,11 @@ if (!$model->isNewRecord) {
             'model' => $model,
             'form' => $form,
             'attributes' => [
-                'branch_id' => [
-                    'type' => Form::INPUT_DROPDOWN_LIST,
-                    'items' => map(Branch::find()->all(), 'id', 'name'),
-                    'options' => [
-                        'prompt' => 'Tanlang...'
-                    ]
-                ],
                 'username',
                 'firstname',
                 'lastname',
+                'middlename',
+                'phone',
                 'password:widget' => [
                     'widgetClass' => VisiblePasswordInput::class,
                     'hint' => $passwordHint
@@ -47,6 +43,13 @@ if (!$model->isNewRecord) {
                 'type_id' => [
                     'type' => Form::INPUT_DROPDOWN_LIST,
                     'items' => User::types(),
+                ],
+                'doctor_type_id' => [
+                    'type' => Form::INPUT_DROPDOWN_LIST,
+                    'items' => DoctorType::map(),
+                    'options' => [
+                            'prompt' => '---'
+                    ]
                 ],
                 'status:radioButtonGroup' => [
                     'items' => User::statuses(),

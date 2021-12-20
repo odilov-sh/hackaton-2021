@@ -23,22 +23,22 @@ class User extends \common\models\User
         $auth->assign($workerRole, $this->id);
     }
 
-    public function beforeDelete()
-    {
-        if (!parent::beforeDelete()) {
-            return false;
-        }
-
-        $auth = Yii::$app->authManager;
-        $permissions = ['admin', 'worker'];
-        foreach ($permissions as $permissionName) {
-            $role = $auth->getRole($permissionName);
-            if ($role) {
-                $auth->revoke($role, $this->getId());
-            }
-        }
-        return true;
-    }
+//    public function beforeDelete()
+//    {
+//        if (!parent::beforeDelete()) {
+//            return false;
+//        }
+//
+//        $auth = Yii::$app->authManager;
+//        $permissions = ['admin', 'worker'];
+//        foreach ($permissions as $permissionName) {
+//            $role = $auth->getRole($permissionName);
+//            if ($role) {
+//                $auth->revoke($role, $this->getId());
+//            }
+//        }
+//        return true;
+//    }
 
 
 }

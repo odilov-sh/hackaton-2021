@@ -2,10 +2,10 @@
 
 
 /* @var $this soft\web\View */
-/* @var $model common\models\Reception */
+/* @var $model backend\models\DoctorType */
 
 $this->title = Yii::t('site', 'Create a new');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Qabul'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Doktor turlari', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

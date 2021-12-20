@@ -6,7 +6,7 @@ use soft\helpers\Html;
 /* @var $searchModel common\models\search\ReceptionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Receptions');
+$this->title = Yii::t('app', 'Qabul');
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerAjaxCrudAssets();
 ?>
@@ -16,10 +16,7 @@ $this->registerAjaxCrudAssets();
         'filterModel' => $searchModel, 
         'toolbarTemplate' => '{create}{refresh}',
         'toolbarButtons' => [
-            'create' => [
-                /** @see soft\widget\button\Button for other configurations */
-                'modal' => true,
-            ]
+            'create' =>false,
         ],
         'bulkButtonsTemplate' => '{delete}',
         'bulkButtons' => [
@@ -28,7 +25,7 @@ $this->registerAjaxCrudAssets();
             ],
         ],
         'columns' => [
-                    'id',
+            'id',
             'client_id',
             'weight',
             'fever',

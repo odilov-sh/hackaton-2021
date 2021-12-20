@@ -1,15 +1,15 @@
 <?php
 
-namespace frontend\modules\doctor\controllers;
+namespace backend\controllers;
 
 use Yii;
-use common\models\Reception;
-use common\models\search\ReceptionSearch;
+use backend\models\DoctorType;
+use backend\models\search\DoctorTypeSearch;
 use soft\web\SoftController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-class ReceptionController extends SoftController
+class DoctorTypeController extends SoftController
 {
 
     /**
@@ -25,7 +25,7 @@ class ReceptionController extends SoftController
                     'bulk-delete' => ['POST'],
                 ],
             ],
-            'access' => [
+            /*'access' => [
                 'class' => \yii\filters\AccessControl::className(),
                 'rules' => [
                     [
@@ -33,17 +33,17 @@ class ReceptionController extends SoftController
                         'roles' => ['admin'],
                     ],
                 ],
-            ]
+            ]*/
         ];
     }
 
     /**
-    * Lists all Reception models.
+    * Lists all DoctorType models.
     * @return mixed
     */
     public function actionIndex()
     {
-        $searchModel = new ReceptionSearch();
+        $searchModel = new DoctorTypeSearch();
         $dataProvider = $searchModel->search();
 
         return $this->render('index', [
@@ -53,7 +53,7 @@ class ReceptionController extends SoftController
     }
 
     /**
-    * Displays a single Reception model.
+    * Displays a single DoctorType model.
     * @param integer $id
     * @return string
     * @throws NotFoundHttpException if the model cannot be found
@@ -65,26 +65,17 @@ class ReceptionController extends SoftController
     }
 
     /**
-    * Creates a new Reception model.
+    * Creates a new DoctorType model.
     * @return string
     */
     public function actionCreate()
     {
-        $client_id=Yii::$app->request->get('client_id');
-        if ($client_id)
-        {
-            $model = new Reception();
-            $model->client_id=$client_id;
-            return $this->ajaxCrud->createAction($model);
-        }
-        else{
-            not_found();
-        }
-
+        $model = new DoctorType();
+        return $this->ajaxCrud->createAction($model);
     }
 
     /**
-    * Updates an existing Reception model.
+    * Updates an existing DoctorType model.
     * @param integer $id
     * @return string
     * @throws NotFoundHttpException if the model cannot be found
@@ -96,7 +87,7 @@ class ReceptionController extends SoftController
     }
 
     /**
-    * Deletes an existing Reception model.
+    * Deletes an existing DoctorType model.
     * @param integer $id
     * @return mixed
     * @throws NotFoundHttpException if the model cannot be found
@@ -108,7 +99,7 @@ class ReceptionController extends SoftController
     }
 
     /**
-    * Delete multiple existing Reception model.
+    * Delete multiple existing DoctorType model.
     * @param integer $id
     * @return mixed
     */
@@ -126,12 +117,12 @@ class ReceptionController extends SoftController
     /**
     * Finds a single model for crud actions
     * @param $id
-    * @return Reception
+    * @return DoctorType
     * @throws yii\web\NotFoundHttpException
     */
     public function findModel($id)
     {
-        $model = Reception::find()->andWhere(['id' => $id])->one();
+        $model = DoctorType::find()->andWhere(['id' => $id])->one();
         if ($model == null){
             not_found();
         }

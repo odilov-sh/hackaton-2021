@@ -44,7 +44,6 @@ class UserController extends SoftController
     public function actionCreate()
     {
         $model = new User();
-        $model->scenario = User::SCENARIO_CREATE_BY_ADMIN;
         $model->status = User::STATUS_ACTIVE;
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->password_hash = Yii::$app->security->generatePasswordHash($model->password);
@@ -65,7 +64,7 @@ class UserController extends SoftController
     {
         $model = $this->findModel($id);
         $model->status = User::STATUS_ACTIVE;
-        $model->scenario = User::SCENARIO_UPDATE_BY_ADMIN;
+//        $model->scenario = User::SCENARIO_UPDATE_BY_ADMIN;
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
 
             if (!empty($model->password)) {
@@ -109,7 +108,7 @@ class UserController extends SoftController
     {
         /** @var User $model */
 
-        $model = User::find()->id($id)->andWhere(['!=', 'is_deleted', '1'])->one();
+        $model = User::find()->id($id)->one();
         if ($model == null) {
             not_found();
         }

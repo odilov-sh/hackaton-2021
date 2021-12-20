@@ -16,7 +16,6 @@ use soft\widget\kartik\Form;
     'model' => $model,
     'form' => $form,
     'attributes' => [
-        'client_id',
         'weight',
         'fever',
         'height',
