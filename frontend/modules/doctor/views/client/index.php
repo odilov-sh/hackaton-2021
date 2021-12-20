@@ -27,7 +27,19 @@ $this->registerAjaxCrudAssets();
         'firstname',
         'lastname',
         'middlename',
-        'date_of_birth:date',
+        [
+            'attribute' => 'date_of_birth',
+            'label' => "Tug'ilgan sana",
+            'width' => '120px',
+            'value' => function ($data) {
+                return date('Y.m.d', $data->date_of_birth);
+            },
+            'filterInputOptions'=>[
+                'placeholder' => 'YYYY.OO.KK',
+                'class' => 'form-control'
+            ]
+
+        ],
         'passport',
         'actionColumn' => [
 

@@ -470,4 +470,6 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     //</editor-fold>
+
+
 }

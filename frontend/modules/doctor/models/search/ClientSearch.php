@@ -2,6 +2,7 @@
 
 namespace frontend\modules\doctor\models\search;
 
+use soft\helpers\ArrayHelper;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -14,7 +15,7 @@ class ClientSearch extends Client
     {
         return [
             [['id', 'status', 'created_at', 'updated_at', 'type_id'], 'integer'],
-            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'firstname', 'lastname'], 'safe'],
+            [['firstname', 'lastname', 'middlename', 'passport', 'date_of_birth'], 'safe'],
         ];
     }
 
@@ -62,6 +63,36 @@ class ClientSearch extends Client
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'firstname', $this->firstname])
             ->andFilterWhere(['like', 'lastname', $this->lastname]);
+
+
+        if ($this->date_of_birth) {
+
+            $data = explode('.', $this->date_of_birth);
+
+            if (!empty($data)) {
+
+                $year = $data[0];
+                $month = ArrayHelper::getArrayValue($data, 1, 01);
+                $day = ArrayHelper::getArrayValue($data, 2, 01);
+
+                $count = count($data);
+                $add = '+1 day';
+                if ($count == 1) {
+                    $add = '+1 year';
+                }
+                if ($count == 2) {
+                    $add = '+1 month';
+                }
+
+                $from = strtotime("$year-$month-$day");
+                $end = strtotime($add, $from);
+
+                $query->andWhere(['>=', 'date_of_birth', $from]);
+                $query->andWhere(['<', 'date_of_birth', $end]);
+            }
+
+
+        }
 
         return $dataProvider;
     }
