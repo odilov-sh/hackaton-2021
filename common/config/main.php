@@ -27,7 +27,7 @@ return [
                     ],
                 ],
                 'app' => [
-                    'class' => 'yii\i18n\DbMessageSource',
+                    'class' => 'yii\i18n\PhpMessageSource',
                 ],
             ],
         ],

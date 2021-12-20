@@ -2,9 +2,9 @@
 
 namespace common\models;
 
+use Yii;
 use common\models\query\UserQuery;
 use soft\helpers\ArrayHelper;
-use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -33,7 +33,6 @@ use yii\web\IdentityInterface;
  * @property-read string $fullname
  *
  * @property-read bool $isConsultant
- * @property-read \common\models\Branch $branch
  * @property-read bool $isManager
  * @property-read string $typeName
  *
