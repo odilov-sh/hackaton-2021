@@ -92,11 +92,10 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
 
             $user = Yii::$app->user->identity;
-
-            if (($user->isManager || $user->isConsultant) && $user->branch) {
-                return $this->redirect('/branch');
-            }
-
+//
+//            if ($user->getIsDoctor()) {
+//                return $this->redirect('/doctor');
+//            }
             return $this->goBack();
         } else {
             $model->password = '';
