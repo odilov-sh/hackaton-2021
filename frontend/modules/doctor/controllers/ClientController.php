@@ -14,6 +14,7 @@ use Yii;
 use frontend\modules\doctor\models\Client;
 use frontend\modules\doctor\models\search\ClientSearch;
 use soft\web\SoftController;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -157,6 +158,20 @@ class ClientController extends SoftController
     public function actionSearch()
     {
         return $this->render('search');
+    }
+    public function actionPechatView($client_id)
+    {
+        $client = $this->findModel($client_id);
+        $receptions = Yii::$app->request->post('selection');
+        if (empty($client) || empty($receptions)) {
+
+            throw new ForbiddenHttpException(Yii::t('app', 'The requested action does not exist.'));
+        }
+
+        return $this->render('pechat_view', [
+            'client' => $client,
+            'receptions' => $receptions
+        ]);
     }
 
     public function actionMyClient()
