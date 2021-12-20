@@ -62,4 +62,17 @@ class Quarter extends \yii\db\ActiveRecord
     {
         return $this->hasOne(District::className(), ['id' => 'district_id']);
     }
+
+    /**
+     * @param $district_id
+     * @return array
+     */
+    public static function mapByDistrictId($district_id)
+    {
+        if (empty($district_id)) {
+            return [];
+        }
+
+        return map(static::find()->andWhere(['district_id' => $district_id])->all(), 'id', 'name');
+    }
 }

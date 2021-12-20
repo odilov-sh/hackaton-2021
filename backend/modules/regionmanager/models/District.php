@@ -81,4 +81,18 @@ class District extends \yii\db\ActiveRecord
     {
         return $this->name_uz;
     }
+
+    /**
+     * @param $region_id
+     * @return array
+     */
+    public static function mapByRegionId($region_id)
+    {
+        if (empty($region_id)) {
+            return [];
+        }
+
+        return map(static::find()->andWhere(['region_id' => $region_id])->all(), 'id', 'name');
+    }
+
 }

@@ -1,5 +1,7 @@
 <?php
 
+use backend\modules\regionmanager\models\District;
+use backend\modules\regionmanager\models\Quarter;
 use backend\modules\regionmanager\models\Region;
 use common\models\User;
 use kartik\depdrop\DepDrop;
@@ -10,13 +12,6 @@ use soft\widget\adminlte3\Card;
 
 /* @var $this soft\web\View */
 /* @var $model frontend\modules\doctor\models\Client */
-
-
-$districts = [];
-
-if (!empty($model->district_id)){
-
-}
 
 ?>
 
@@ -60,7 +55,9 @@ if (!empty($model->district_id)){
                     'depends' => ['region-id'],
                     'url' => to(['districts']),
                     'placeholder' => 'Tuman/shaharni tanlang...',
-                ]
+
+                ],
+                'data' => District::mapByRegionId($model->region_id),
             ]
         ],
         'quarter_id:widget' => [
@@ -76,7 +73,8 @@ if (!empty($model->district_id)){
                     'depends' => ['district-id'],
                     'url' => to(['quarters']),
                     'placeholder' => 'Hududni tanlang...',
-                ]
+                ],
+                'data' => Quarter::mapByDistrictId($model->district_id),
             ]
         ],
         'street',
