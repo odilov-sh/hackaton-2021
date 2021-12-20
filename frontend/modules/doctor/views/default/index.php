@@ -2,6 +2,7 @@
 
 use soft\helpers\Url;
 
+$this->title = 'Smart Doktor';
 ?>
 <div class="card">
     <div class="card-header">

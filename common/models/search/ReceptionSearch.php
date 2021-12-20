@@ -13,9 +13,9 @@ class ReceptionSearch extends Reception
     public function rules()
     {
         return [
-            [['id', 'client_id', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
             [['weight', 'fever', 'height'], 'number'],
-            [['blood_pressure', 'complaint', 'analiz_result', 'diagnos'], 'safe'],
+            [['blood_pressure', 'complaint', 'analiz_result', 'diagnos', 'client_id'], 'safe'],
         ];
     }
 
@@ -25,13 +25,13 @@ class ReceptionSearch extends Reception
         return Model::scenarios();
     }
 
-    public function search($query=null, $defaultPageSize = 20, $params=null)
+    public function search($query = null, $defaultPageSize = 20, $params = null)
     {
 
-        if($params == null){
+        if ($params == null) {
             $params = Yii::$app->request->queryParams;
         }
-        if($query == null){
+        if ($query == null) {
             $query = Reception::find();
         }
 
@@ -50,7 +50,6 @@ class ReceptionSearch extends Reception
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'client_id' => $this->client_id,
             'weight' => $this->weight,
             'fever' => $this->fever,
             'height' => $this->height,
@@ -60,9 +59,12 @@ class ReceptionSearch extends Reception
             'updated_at' => $this->updated_at,
         ]);
 
+        $query->joinWith('client');
+
         $query->andFilterWhere(['like', 'blood_pressure', $this->blood_pressure])
             ->andFilterWhere(['like', 'complaint', $this->complaint])
             ->andFilterWhere(['like', 'analiz_result', $this->analiz_result])
+            ->andFilterWhere(['like', 'user.firstname', $this->client_id])
             ->andFilterWhere(['like', 'diagnos', $this->diagnos]);
 
         return $dataProvider;
