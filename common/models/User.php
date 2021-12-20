@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use soft\behaviors\TimestampConvertorBehavior;
 use Yii;
 use common\models\query\UserQuery;
 use soft\helpers\ArrayHelper;
@@ -128,6 +129,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             TimestampBehavior::className(),
+            [
+                'class' => TimestampConvertorBehavior::class,
+                'attribute' => 'date_of_birth'
+            ]
         ];
     }
 

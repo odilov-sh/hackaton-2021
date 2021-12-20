@@ -27,7 +27,9 @@ use soft\widget\adminlte3\Card;
         'firstname',
         'lastname',
         'middlename',
-//        'passport',
+        'passport',
+        'date_of_birth:date',
+        'phone:phone',
         'region_id:select2' => [
             'options' => [
                 'data' => Region::map(),
