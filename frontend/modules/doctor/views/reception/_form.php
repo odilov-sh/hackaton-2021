@@ -15,6 +15,8 @@ use soft\widget\kartik\Form;
 <?= Form::widget([
     'model' => $model,
     'form' => $form,
+    'columns' => 2,
+
     'attributes' => [
         'weight',
         'fever',

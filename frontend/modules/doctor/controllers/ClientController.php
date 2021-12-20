@@ -51,6 +51,8 @@ class ClientController extends SoftController
         ];
     }
 
+    //<editor-fold desc="CRUD" defaultstate="collapsed">
+
     /**
      * Lists all User models.
      * @return mixed
@@ -90,7 +92,7 @@ class ClientController extends SoftController
         $model->scenario = Client::SCENARIO_DOCTOR_FORM;
         $model->doctor_id = Yii::$app->user->getId();
         $model->type_id = Client::TYPE_CLIENT;
-        if ($this->modelSave($model)){
+        if ($this->modelSave($model)) {
             return $this->redirect(['client/view', 'id' => $model->id]);
         }
         return $this->render('create', ['model' => $model]);
@@ -107,7 +109,10 @@ class ClientController extends SoftController
     {
         $model = $this->findModel($id);
         $model->scenario = Client::SCENARIO_DOCTOR_FORM;
-        return $this->ajaxCrud->updateAction($model);
+        if ($this->modelSave($model)) {
+            return $this->redirect(['client/view', 'id' => $model->id]);
+        }
+        return $this->render('update', ['model' => $model]);
     }
 
     /**
@@ -139,4 +144,13 @@ class ClientController extends SoftController
         }
         return $model;
     }
+
+
+    //</editor-fold>
+
+    public function actionSearch()
+    {
+        return $this->render('search');
+    }
+
 }

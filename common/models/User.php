@@ -42,6 +42,8 @@ use yii\web\IdentityInterface;
  * @property int $date_of_birth [int(11)]
  * @property int $gender_id [int(11)]
  * @property int $doctor_id [int(11)]
+ * @property int $doctor_type_id [int(11)]
+ * @property int $polyclinic_id [int(11)]
  *
  * @property-read mixed $statusName
  * @property-read string $statusBadge
@@ -100,6 +102,7 @@ use yii\web\IdentityInterface;
  * @property int $password_last_changed [timestamp]
  * @property int $password_lifetime [smallint(5) unsigned]
  * @property string $account_locked [enum('N', 'Y')]
+
  *
  */
 class User extends ActiveRecord implements IdentityInterface

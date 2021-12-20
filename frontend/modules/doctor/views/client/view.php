@@ -1,6 +1,5 @@
 <?php
 
-
 /* @var $this soft\web\View */
 /* @var $model frontend\modules\doctor\models\Client */
 

@@ -32,12 +32,13 @@ class Reception extends \soft\db\ActiveRecord
     //<editor-fold desc="Parent" defaultstate="collapsed">
 
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public static function tableName()
     {
         return 'reception';
     }
+
     public function behaviors()
     {
         return [
@@ -45,9 +46,10 @@ class Reception extends \soft\db\ActiveRecord
             BlameableBehavior::class,
         ];
     }
+
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
@@ -62,45 +64,51 @@ class Reception extends \soft\db\ActiveRecord
     }
 
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function labels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'client_id' => Yii::t('app', 'Bemor'),
-            'weight' => Yii::t('app', 'Og\'irligi'),
-            'fever' => Yii::t('app', 'Isitma'),
-            'height' => Yii::t('app', 'Balandligi'),
-            'blood_pressure' => Yii::t('app', 'Qon bosimi'),
-            'complaint' => Yii::t('app', 'Shikoyat'),
-            'analiz_result' => Yii::t('app', 'Analiz natijasi'),
-            'diagnos' => Yii::t('app', 'Tashxis'),
+            'client_id' => 'Bemor',
+            'weight' => 'Og\'irligi',
+            'fever' => 'Isitma',
+            'height' => "Bo'yi",
+            'blood_pressure' => 'Qon bosimi',
+            'complaint' => 'Shikoyat',
+            'analiz_result' => 'Analiz natijasi',
+            'diagnos' => 'Tashxis',
+            'created_at' => 'Sana'
         ];
     }
     //</editor-fold>
 
     //<editor-fold desc="Relations" defaultstate="collapsed">
-    
+
     /**
-    * @return \yii\db\ActiveQuery
-    */
+     * @return \yii\db\ActiveQuery
+     */
     public function getClient()
     {
         return $this->hasOne(User::className(), ['id' => 'client_id']);
     }
-    
+
     /**
-    * @return \yii\db\ActiveQuery
-    */
+     * @return \yii\db\ActiveQuery
+     */
     public function getCreatedBy0()
     {
         return $this->hasOne(User::className(), ['id' => 'created_by']);
     }
+
     public function getUpdatedBy0()
     {
         return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }
-    
+
     //</editor-fold>
+
+    public function getFormattedDate()
+    {
+        return Yii::$app->formatter->asDate($this->created_at, 'php:d.m.Y');
+    }
 }

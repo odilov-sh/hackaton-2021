@@ -18,38 +18,38 @@ $this->registerAjaxCrudAssets();
     'toolbarButtons' => [
         'create' => false,
     ],
-    'bulkButtonsTemplate' => '{delete}',
-    'bulkButtons' => [
-        'delete' => [
-            /** @see soft\widget\button\BulkButton for other configurations */
-        ],
-    ],
+
     'columns' => [
         //'id',
         //'client_id',
         [
             'attribute' => 'client_id',
-            'value' => function (\common\models\Reception $model) {
-                return $model->client->fullname;
-            }
+            'value' => 'client.fullname'
+        ],
+
+        [
+            'attribute' => 'created_at',
+            'format' => 'raw',
+            'value' => 'formattedDate',
+            'filter' => false,
         ],
         [
             'attribute' => 'weight',
             'value' => function (\common\models\Reception $model) {
-                return $model->weight.' '.'kg';
+                return $model->weight . ' ' . 'kg';
             }
         ],
         [
             'attribute' => 'fever',
             'value' => function (\common\models\Reception $model) {
-                return $model->fever.' '.'C';
+                return $model->fever . ' ' . 'C';
             }
         ],
-       // 'fever',
+        // 'fever',
         [
             'attribute' => 'height',
             'value' => function (\common\models\Reception $model) {
-                return $model->height.' '.'M';
+                return $model->height . ' ' . 'M';
             }
         ],
         //'height',
@@ -71,4 +71,3 @@ $this->registerAjaxCrudAssets();
         ],
     ],
 ]); ?>
-    
