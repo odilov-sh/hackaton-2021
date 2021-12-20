@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $model frontend\modules\doctor\models\Client */
 
 $this->title = Yii::t('site', 'Update');
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => 'Bemorlar', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->fullname, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

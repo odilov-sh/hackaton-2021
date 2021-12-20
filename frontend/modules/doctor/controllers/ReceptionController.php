@@ -71,12 +71,15 @@ class ReceptionController extends SoftController
     public function actionCreate()
     {
         $client_id=Yii::$app->request->get('client_id');
+
         if ($client_id)
         {
             $model = new Reception();
             $model->client_id=$client_id;
+
             return $this->ajaxCrud->createAction($model);
         }
+
         else{
             not_found();
         }

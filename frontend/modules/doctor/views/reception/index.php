@@ -65,9 +65,6 @@ $this->registerAjaxCrudAssets();
             'viewOptions' => [
                 'role' => 'modal-remote',
             ],
-            'updateOptions' => [
-                'role' => 'modal-remote',
-            ],
         ],
     ],
 ]); ?>

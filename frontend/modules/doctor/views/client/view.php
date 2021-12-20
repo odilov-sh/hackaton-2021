@@ -3,8 +3,8 @@
 /* @var $this soft\web\View */
 /* @var $model frontend\modules\doctor\models\Client */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Mijozlar', 'url' => ['index']];
+$this->title = $model->fullname;
+$this->params['breadcrumbs'][] = ['label' => 'Bemorlar', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

@@ -8,7 +8,7 @@
 use common\models\Reception;
 use soft\widget\bs4\DetailView;
 
-$this->title = $model->id;
+$this->title = $model->client->fullname;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Qabul'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -18,12 +18,19 @@ $this->params['breadcrumbs'][] = $this->title;
     'model' => $model,
     'panel' => $this->isAjax ? false : [],
     'attributes' => [
-        'id',
-        'client_id',
+//        'id',
+        [
+            'attribute' => 'client.fullname',
+            'format' => 'raw',
+            'label' => 'Bemor F.I.SH'
+        ],
         'weight',
         'fever',
         'height',
-        'blood_pressure',
+       [
+           'attribute' =>  'blood_pressure',
+           'format' => 'raw'
+       ],
         //'complaint',
         [
             'attribute' => 'complaint',

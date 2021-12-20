@@ -8,7 +8,7 @@ use soft\helpers\Url;
 /* @var $searchModel frontend\modules\doctor\models\search\ClientSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Mijozlar';
+$this->title = 'Bemorlar';
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerAjaxCrudAssets();
 ?>
