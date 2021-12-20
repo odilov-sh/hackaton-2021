@@ -55,7 +55,7 @@ class Reception extends \soft\db\ActiveRecord
         return [
             [['client_id', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
             [['weight', 'fever', 'height'], 'number'],
-            [['complaint', 'analiz_result', 'diagnos'], 'string'],
+            [['complaint', 'analiz_result', 'diagnos','reference'], 'string'],
             [['blood_pressure'], 'string', 'max' => 255],
             [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['client_id' => 'id']],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
@@ -74,41 +74,39 @@ class Reception extends \soft\db\ActiveRecord
             'fever' => 'Isitma',
             'height' => "Bo'yi",
             'blood_pressure' => 'Qon bosimi',
-            'complaint' => 'Shikoyat',
+            'complaint' => 'Bemor Shikoyati',
             'analiz_result' => 'Analiz natijasi',
             'diagnos' => 'Tashxis',
-            'created_at' => 'Sana'
+            'created_at' => 'Sana',
+            'reference'=>'Shifokor tavsiyasi',
         ];
     }
     //</editor-fold>
 
     //<editor-fold desc="Relations" defaultstate="collapsed">
-
+    
     /**
-     * @return \yii\db\ActiveQuery
-     */
+    * @return \yii\db\ActiveQuery
+    */
     public function getClient()
     {
         return $this->hasOne(User::className(), ['id' => 'client_id']);
     }
-
+    
     /**
-     * @return \yii\db\ActiveQuery
-     */
+    * @return \yii\db\ActiveQuery
+    */
     public function getCreatedBy0()
     {
         return $this->hasOne(User::className(), ['id' => 'created_by']);
     }
-
     public function getUpdatedBy0()
     {
         return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }
-
-    //</editor-fold>
-
-    public function getFormattedDate()
-    {
-        return Yii::$app->formatter->asDate($this->created_at, 'php:d.m.Y');
+    public function getFormattedDate(){
+        return Yii::$app->formatter->asDate($this->created_at,'d.m.Y');
     }
+    
+    //</editor-fold>
 }
