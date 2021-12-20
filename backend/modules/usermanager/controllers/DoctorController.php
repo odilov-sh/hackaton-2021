@@ -1,0 +1,142 @@
+<?php
+
+
+namespace backend\modules\usermanager\controllers;
+
+
+use backend\modules\regionmanager\actions\DistrictsAction;
+use backend\modules\regionmanager\actions\QuartersAction;
+use backend\modules\usermanager\models\search\UserSearch;
+use backend\modules\usermanager\models\User;
+use Yii;
+use yii\web\Controller;
+
+class DoctorController extends Controller
+{
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    //<editor-fold desc="CRUD" defaultstate="collapsed">
+
+    public function actions()
+    {
+        return [
+            'districts' => [
+                'class' => DistrictsAction::class,
+            ],
+            'quarters' => [
+                'class' => QuartersAction::class,
+            ],
+        ];
+    }
+
+    public function actionIndex()
+    {
+        $searchModel = new UserSearch();
+        $query = User::find()
+            ->andWhere(['!=', 'id', 1])
+            ->andWhere(['type_id' => User::TYPE_DOCTOR]);
+
+        $dataProvider = $searchModel->search($query);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * @throws \yii\base\Exception
+     */
+    public function actionCreate()
+    {
+        $model = new User();
+        $model->status = User::STATUS_ACTIVE;
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->password_hash = Yii::$app->security->generatePasswordHash($model->password);
+            $model->auth_key = Yii::$app->security->generateRandomString();
+            if ($model->save(false)) {
+                return $this->redirect(['index']);
+            }
+        }
+
+        return $this->render('create', ['model' => $model]);
+    }
+
+    /**
+     * @throws \yii\base\Exception
+     * @throws \yii\web\NotFoundHttpException
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+        $model->status = User::STATUS_ACTIVE;
+//        $model->scenario = User::SCENARIO_UPDATE_BY_ADMIN;
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            if (!empty($model->password)) {
+                $model->password_hash = Yii::$app->security->generatePasswordHash($model->password);
+                $model->auth_key = Yii::$app->security->generateRandomString();
+            }
+
+            if ($model->save(false)) {
+                return $this->redirect(['index']);
+            }
+        }
+
+        return $this->render('update', ['model' => $model]);
+    }
+
+    public function actionView($id)
+    {
+        $model = $this->findModel($id);
+        return $this->ajaxCrud->viewAction($model);
+    }
+
+    public function actionDelete($id)
+    {
+        $model = $this->findModel($id);
+        $model->delete();
+        if ($this->isAjax) {
+            $this->formatJson();
+            return $this->ajaxCrud->closeModalResponse();
+        }
+        return redirect('index');
+    }
+
+    //</editor-fold>
+
+    /**
+     * @return User
+     * @throws \yii\web\NotFoundHttpException
+     * @throws \yii\web\ForbiddenHttpException|\yii\base\InvalidConfigException
+     */
+    private function findModel($id)
+    {
+        /** @var User $model */
+
+        $model = User::find()->id($id)->one();
+        if ($model == null) {
+            not_found();
+        }
+
+        if ($model->id == 1) {
+            forbidden();
+        }
+
+        return $model;
+    }
+}

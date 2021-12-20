@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use backend\models\Polyclinic;
 use backend\modules\regionmanager\models\District;
 use backend\modules\regionmanager\models\Quarter;
 use backend\modules\regionmanager\models\Region;
@@ -89,6 +90,7 @@ use yii\web\IdentityInterface;
  * @property string $x509_issuer [blob]
  * @property string $x509_subject [blob]
  * @property int $max_questions [int(11) unsigned]
+ * @property int $polyclinic_id [int(11)]
  * @property int $max_updates [int(11) unsigned]
  * @property int $max_connections [int(11) unsigned]
  * @property int $max_user_connections [int(11) unsigned]
@@ -149,7 +151,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['password', 'string', 'min' => 5],
             ['password', 'trim'],
 
-            [['doctor_type_id', 'district_id', 'region_id', 'quarter_id'], 'integer'],
+            [['doctor_type_id', 'district_id', 'region_id', 'quarter_id', 'polyclinic_id'], 'integer'],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
 
@@ -177,7 +179,8 @@ class User extends ActiveRecord implements IdentityInterface
             'date_of_birth' => "Tug'ilgan sanasi",
             'street' => "Ko'cha nomi",
             'house_number' => 'Uy raqami',
-            'gender_id' => 'Jinsi'
+            'gender_id' => 'Jinsi',
+            'polyclinic_id' => 'Poliklinika nomi'
         ];
     }
 
@@ -193,10 +196,10 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function beforeSave($insert)
     {
-        if(!parent::beforeSave($insert)){
-          return false;
+        if (!parent::beforeSave($insert)) {
+            return false;
         }
-        if (empty($this->auth_key)){
+        if (empty($this->auth_key)) {
             $this->generateAuthKey();
         }
         return true;
@@ -491,6 +494,14 @@ class User extends ActiveRecord implements IdentityInterface
 
         return $this->hasOne(Quarter::class, [
             'id' => 'quarter_id'
+        ]);
+    }
+
+    public function getPolyclinic()
+    {
+
+        return $this->hasOne(Polyclinic::class, [
+            'id' => 'polyclinic_id'
         ]);
     }
 }

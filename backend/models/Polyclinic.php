@@ -4,6 +4,7 @@ namespace backend\models;
 
 use backend\modules\regionmanager\models\District;
 use backend\modules\regionmanager\models\Region;
+use soft\helpers\ArrayHelper;
 use Yii;
 
 /**
@@ -82,5 +83,11 @@ class Polyclinic extends \soft\db\ActiveRecord
             'id' => 'district_id'
         ]);
     }
+
     //</editor-fold>
+
+    public static function map()
+    {
+        return ArrayHelper::map(self::find()->all(), 'id', 'name');
+    }
 }
