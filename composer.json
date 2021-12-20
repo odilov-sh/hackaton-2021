@@ -22,7 +22,8 @@
         "kartik-v/yii2-builder": "@dev",
         "johnitvn/yii2-ajaxcrud": "*",
         "yeesoft/yii2-multilingual": "~1.0.0",
-        "yiisoft/yii2-jui": "~2.0.0" 
+        "yiisoft/yii2-jui": "~2.0.0",
+        "kartik-v/yii2-widget-depdrop": "dev-master"
 
     },
     "require-dev": {
