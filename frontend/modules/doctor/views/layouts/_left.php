@@ -4,7 +4,8 @@
 $menuItems = [
     ['label' => "Bosh sahifa", 'url' => ['/doctor'], 'icon' => 'home',],
     ['label' => "Bemorlar", 'url' => ['/doctor/client'], 'icon' => 'user',],
-    ['label' => "Qabul", 'url' => ['/doctor/reception'], 'icon' => 'user',],
+    ['label' => "Qabullar", 'url' => ['/doctor/reception'], 'icon' => 'clipboard-list,fas',],
+    ['label' => "Mening bemorlarim", 'url' => ['/doctor/client/my-client'], 'icon' => 'users,fas',],
 
 ];
 

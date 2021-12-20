@@ -4,6 +4,7 @@ namespace frontend\modules\doctor\controllers;
 
 use backend\modules\regionmanager\actions\DistrictsAction;
 use backend\modules\regionmanager\actions\QuartersAction;
+use common\models\Reception;
 use Yii;
 use frontend\modules\doctor\models\Client;
 use frontend\modules\doctor\models\search\ClientSearch;
@@ -151,6 +152,22 @@ class ClientController extends SoftController
     public function actionSearch()
     {
         return $this->render('search');
+    }
+
+    public function actionMyClient()
+    {
+
+        $searchModel = new ClientSearch();
+
+        $query = Client::find()
+            ->andWhere(['doctor_id'=>Yii::$app->user->id]);
+
+        $dataProvider = $searchModel->search($query);
+
+        return $this->render('my_client', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
 }
