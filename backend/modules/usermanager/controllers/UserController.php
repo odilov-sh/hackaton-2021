@@ -2,6 +2,8 @@
 
 namespace backend\modules\usermanager\controllers;
 
+use backend\modules\regionmanager\actions\DistrictsAction;
+use backend\modules\regionmanager\actions\QuartersAction;
 use backend\modules\usermanager\models\search\UserSearch;
 use backend\modules\usermanager\models\User;
 use soft\web\SoftController;
@@ -26,6 +28,18 @@ class UserController extends SoftController
     }
 
     //<editor-fold desc="CRUD" defaultstate="collapsed">
+
+    public function actions()
+    {
+        return [
+            'districts' => [
+                'class' => DistrictsAction::class,
+            ],
+            'quarters' => [
+                'class' => QuartersAction::class,
+            ],
+        ];
+    }
 
     public function actionIndex()
     {

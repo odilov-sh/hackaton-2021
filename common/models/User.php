@@ -2,6 +2,9 @@
 
 namespace common\models;
 
+use backend\modules\regionmanager\models\District;
+use backend\modules\regionmanager\models\Quarter;
+use backend\modules\regionmanager\models\Region;
 use Yii;
 use soft\behaviors\TimestampConvertorBehavior;
 use common\models\query\UserQuery;
@@ -129,10 +132,6 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             TimestampBehavior::className(),
-            [
-                'class' => TimestampConvertorBehavior::class,
-                'attribute' => 'date_of_birth'
-            ]
         ];
     }
 
@@ -150,7 +149,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['password', 'string', 'min' => 5],
             ['password', 'trim'],
 
-            [['doctor_type_id'], 'integer'],
+            [['doctor_type_id', 'district_id', 'region_id', 'quarter_id'], 'integer'],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
 
@@ -470,4 +469,28 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     //</editor-fold>
+
+    public function getRegion()
+    {
+
+        return $this->hasOne(Region::class, [
+            'id' => 'region_id'
+        ]);
+    }
+
+    public function getDistrict()
+    {
+
+        return $this->hasOne(District::class, [
+            'id' => 'district_id'
+        ]);
+    }
+
+    public function getQuarter()
+    {
+
+        return $this->hasOne(Quarter::class, [
+            'id' => 'quarter_id'
+        ]);
+    }
 }

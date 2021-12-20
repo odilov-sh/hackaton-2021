@@ -3,6 +3,8 @@
 /* @var $this soft\web\View */
 /* @var $content string */
 
+use yii\bootstrap4\Breadcrumbs;
+
 ?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -12,7 +14,7 @@
 
                 <div class="col-sm-12 mt-2 mb-2">
 
-                    <?= \yii\bootstrap4\Breadcrumbs::widget([
+                    <?= Breadcrumbs::widget([
                         'links' => $this->params['breadcrumbs'] ?? []
                     ]) ?>
 
