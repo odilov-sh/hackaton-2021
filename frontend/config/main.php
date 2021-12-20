@@ -13,6 +13,9 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'homeUrl' => ['branch/'],
     'modules' => [
+        'doctor' => [
+            'class' => 'frontend\modules\doctor\Module',
+        ],
         'branch' => [
             'class' => 'frontend\modules\branch\BranchModule',
             'layout' => 'main',
