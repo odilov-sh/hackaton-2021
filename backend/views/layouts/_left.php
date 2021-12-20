@@ -4,7 +4,7 @@ use common\models\Contract;
 
 $menuItems = [
     ['label' => "Bosh sahifa", 'url' => ['/site/index'], 'icon' => 'home',],
-    ['label' => "Doktorlar", 'url' => ['/usermanager'], 'icon' => 'user-md',],
+    ['label' => "Doktorlar", 'url' => ['/usermanager/doctor/index'], 'icon' => 'user-md',],
     ['label' => "Doktor turlari", 'url' => ['/doctor-type'], 'icon' => 'star-of-life,fas'],
     ['label' => "Poliklinikalar", 'url' => ['/polyclinic'], 'icon' => 'hospital-user,fas'],
 ];
