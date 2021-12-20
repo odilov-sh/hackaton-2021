@@ -105,7 +105,7 @@ class Reception extends \soft\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }
     public function getFormattedDate(){
-        return Yii::$app->formatter->asDate($this->created_at,'d.m.Y');
+        return Yii::$app->formatter->asDate($this->created_at,'dd.MM.yyyy');
     }
     
     //</editor-fold>

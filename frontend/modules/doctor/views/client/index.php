@@ -45,12 +45,18 @@ $this->registerAjaxCrudAssets();
         'passport',
         'actionColumn' =>
             [
-                'template' => '{client} {view} {update} {delete}',
+                'template' => '{client} {view} {update} {delete} {pechat}',
                 'buttons' =>
                     [
                         'client' => function ($url, $model, $key) {
                             return Html::a('<i class="fas fa-notes-medical"></i>', [Url::to(['reception/create', 'client_id' => $model->id])], [
                                 'title' => 'Qabul',
+                                'data-pjax' => '0'
+                            ]);
+                        },
+                        'pechat' => function ($url, $model, $key) {
+                            return Html::a('<i class="fas fa-print"></i>',$url, [
+                                'title' => 'Pechat',
                                 'data-pjax' => '0'
                             ]);
                         }
