@@ -21,11 +21,9 @@ use soft\widget\kartik\Form;
               'fever',
               'height',
               'blood_pressure',
-              'complaint',
-              'analiz_result',
+              'complaint:ckeditor',
+              'analiz_result:ckeditor',
               'diagnos',
-              'created_by',
-              'updated_by',
         ]
     ]); ?>
     <div class="form-group">
