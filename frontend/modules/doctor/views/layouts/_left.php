@@ -4,6 +4,7 @@ use soft\widget\adminlte3\Menu;
 
 $menuItems = [
     ['label' => "Bosh sahifa", 'url' => ['/doctor'], 'icon' => 'home',],
+    ['label' => "Mijozlar", 'url' => ['client/index'], 'icon' => 'hospital-user,fas',],
     ['label' => "Qabul", 'url' => ['reception/index'], 'icon' => 'user',],
 ];
 
