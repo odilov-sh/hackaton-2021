@@ -140,7 +140,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['username', 'trim'],
             ['username', 'unique', 'message' => 'Ushbu login avvalroq band qilingan.'],
             [['username', 'firstname', 'type_id'], 'required'],
-            [['username', 'firstname', 'lastname','phone','middlename'], 'string', 'max' => 255],
+            [['username', 'firstname', 'lastname', 'phone', 'middlename'], 'string', 'max' => 255],
 
             ['password', 'string', 'min' => 5],
             ['password', 'trim'],
