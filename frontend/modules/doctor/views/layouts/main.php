@@ -8,7 +8,6 @@ use soft\helpers\SiteHelper;
 use yii\helpers\Html;
 
 AdminLte3Asset::register($this);
-
 ?>
 
 <?php $this->beginPage() ?>

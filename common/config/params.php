@@ -13,4 +13,5 @@ return [
         'en' => "English",
     ],
     'defaultLanguage' => 'uz',
+    'bsVersion' => '4'
 ];
