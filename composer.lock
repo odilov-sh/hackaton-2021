@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3f528a9e9601ed3ec3e59a86fd84eca3",
+    "content-hash": "067b260dd88c5a3df5eede41e611d767",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -3724,7 +3724,9 @@
     "stability-flags": {
         "kartik-v/yii2-widgets": 20,
         "kartik-v/yii2-builder": 20,
-        "kartik-v/yii2-widget-depdrop": 20
+        "phpoffice/phpword": 20,
+        "kartik-v/yii2-widget-switchinput": 20,
+        "kartik-v/yii2-date-range": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
