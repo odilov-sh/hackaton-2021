@@ -83,6 +83,11 @@ use yii\web\IdentityInterface;
  * @property string $account_locked [enum('N', 'Y')]
  * @property bool $is_deleted [tinyint(1)]
  * @property int $deleted_by [int(11)]
+ * @property-read null|mixed $genderName
+ * @property-read bool $isFemale
+ * @property-read bool $isClient
+ * @property-read bool $isDoctor
+ * @property-read bool $isMale
  * @property int $deleted_at [int(11)]
  */
 class User extends ActiveRecord implements IdentityInterface
