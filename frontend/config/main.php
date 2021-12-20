@@ -15,6 +15,7 @@ return [
     'modules' => [
         'doctor' => [
             'class' => 'frontend\modules\doctor\Module',
+            'layout' => 'main',
         ],
         'branch' => [
             'class' => 'frontend\modules\branch\BranchModule',

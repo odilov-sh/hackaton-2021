@@ -17,6 +17,7 @@ class AppAsset extends AssetBundle
     public $js = [
     ];
     public $depends = [
+        'frontend\assets\AdminLte3Asset',
         'frontend\assets\Fa5Asset',
         'yii\web\YiiAsset',
         'yii\bootstrap4\BootstrapAsset',
