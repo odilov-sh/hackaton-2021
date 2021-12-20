@@ -30,15 +30,15 @@ class m211220_084147_create_add_column_User_table extends Migration
     public function safeDown()
     {
 
-        $this->dropColumn('{{%user}}','gender_id');
-        $this->dropColumn('{{%user}}','date_of_birth');
-        $this->dropColumn('{{%user}}','passport');
-        $this->dropColumn('{{%user}}','phone');
-        $this->dropColumn('{{%user}}','house_number');
-        $this->dropColumn('{{%user}}','street');
-        $this->dropColumn('{{%user}}','quarter_id');
-        $this->dropColumn('{{%user}}','district_id');
-        $this->dropColumn('{{%user}}','region_id');
-        $this->dropColumn('{{%user}}','middlename');
+        $this->dropColumn('{{%user}}', 'gender_id');
+        $this->dropColumn('{{%user}}', 'date_of_birth');
+        $this->dropColumn('{{%user}}', 'passport');
+        $this->dropColumn('{{%user}}', 'phone');
+        $this->dropColumn('{{%user}}', 'house_number');
+        $this->dropColumn('{{%user}}', 'street');
+        $this->dropColumn('{{%user}}', 'quarter_id');
+        $this->dropColumn('{{%user}}', 'district_id');
+        $this->dropColumn('{{%user}}', 'region_id');
+        $this->dropColumn('{{%user}}', 'middlename');
     }
 }
