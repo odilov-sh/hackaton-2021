@@ -30,18 +30,11 @@ $this->registerAjaxCrudAssets();
         ],
     ],
     'columns' => [
-        'id',
-        'username',
-        'auth_key',
-        'password_hash',
-        'password_reset_token',
-        //'email:email',
-        //'status',
-        //'created_at',
-        //'updated_at',
-        //'firstname',
-        //'lastname',
-        //'type_id',
+        'firstname',
+        'lastname',
+        'middlename',
+        'date_of_birth:date',
+        'passport',
         'actionColumn' => [
             'viewOptions' => [
                 'role' => 'modal-remote',
