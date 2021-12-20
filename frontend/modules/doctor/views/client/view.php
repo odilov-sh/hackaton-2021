@@ -5,6 +5,7 @@
 use common\models\Reception;
 use common\models\search\ReceptionSearch;
 use soft\widget\bs4\DetailView;
+use yii\bootstrap4\LinkPager;
 
 /* @var $model frontend\modules\doctor\models\Client */
 
@@ -20,6 +21,8 @@ $query = Reception::find()
 $dataProvider = $searchModel->search($query);
 
 $cleintReceprions = $dataProvider->models;
+
+$pages = $dataProvider->pagination;
 
 ?>
 
@@ -49,45 +52,90 @@ $cleintReceprions = $dataProvider->models;
             <div class="card-body">
                 <div class="row">
                     <?php foreach ($cleintReceprions as $cleintReceprion): ?>
-                    <div class="col-6">
-                        <div class="card bg-gradient-default collapsed-card">
-                            <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
+                        <div class="col-6">
+                            <div class="card bg-gradient-default collapsed-card">
+                                <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
                             <span class="card-titl text-sm">
-                                Nomi
                                 <span class="text-sm" style="margin-left: 10px"><i
-                                            class="fas fa-calendar-alt"> 12-12-2021</i></span>
-                                <br>
+                                            class="fas fa-calendar-alt"> <?= Yii::$app->formatter->asDate($cleintReceprion->created_at, 'd-M-Y') ?></i></span>
                                 <i class="fas fa-user-md text-primary"
-                                   style="margin-left: 5px">&nbsp;&nbsp;Doktor full name</i>
+                                   style="margin-left: 5px">&nbsp;&nbsp;<?= $cleintReceprion->createdBy0->fullname ?></i>
                             </span>
-                                <!-- card tools -->
-                                <div class="card-tools" style="margin-top: -20px">
-                                    <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse"
-                                            title="Collapse">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
+                                    <!-- card tools -->
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse"
+                                                title="Collapse">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <!-- /.card-tools -->
                                 </div>
-                                <!-- /.card-tools -->
-                            </div>
 
-                            <div class="card-body" style="display: none;">
-                                <table class="table table-bordered">
-
-                                    <tr>
-                                        <td>1</td>
-                                        <td>
-                                            <b> <span class="text-sm"> Nomi</span></b><br>
-
-                                            <span class="text-sm">salom</span>
-                                        </td>
-
-                                    </tr>
-
-                                </table>
+                                <div class="card-body" style="display: none;">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td><b>Nomi</b></td>
+                                            <td>
+                                                <b> <span class="text-sm">Qiymati</span></b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Og'irligi</b></td>
+                                            <td>
+                                                <span class="text-sm"><?= $cleintReceprion->weight ?></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Harorati</b></td>
+                                            <td>
+                                                <span class="text-sm"><?= $cleintReceprion->fever ?></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Bo'yi</b></td>
+                                            <td>
+                                                <span class="text-sm"><?= $cleintReceprion->height ?></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Qon bosimi</b></td>
+                                            <td>
+                                                <span class="text-sm"><?= $cleintReceprion->blood_pressure ?></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Bemor shikoyati</b></td>
+                                            <td>
+                                                <span class="text-sm"><?= $cleintReceprion->complaint ?></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Analiz natijalari</b></td>
+                                            <td>
+                                                <span class="text-sm"><?= $cleintReceprion->analiz_result ?></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Tashxis</b></td>
+                                            <td>
+                                                <span class="text-sm"><?= $cleintReceprion->diagnos ?></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Shifokor tavsiyasi</b></td>
+                                            <td>
+                                                <span class="text-sm"><?= $cleintReceprion->reference ?></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     <?php endforeach; ?>
+
+                    <?php echo LinkPager::widget([
+                        'pagination' => $pages,
+                    ]); ?>
                 </div>
             </div>
         </div>
