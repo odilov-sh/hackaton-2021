@@ -60,18 +60,14 @@ class Reception extends \soft\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'client_id' => Yii::t('app', 'Client ID'),
-            'weight' => Yii::t('app', 'Weight'),
-            'fever' => Yii::t('app', 'Fever'),
-            'height' => Yii::t('app', 'Height'),
-            'blood_pressure' => Yii::t('app', 'Blood Pressure'),
-            'complaint' => Yii::t('app', 'Complaint'),
-            'analiz_result' => Yii::t('app', 'Analiz Result'),
-            'diagnos' => Yii::t('app', 'Diagnos'),
-            'created_by' => Yii::t('app', 'Created By'),
-            'updated_by' => Yii::t('app', 'Updated By'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'client_id' => Yii::t('app', 'Bemor'),
+            'weight' => Yii::t('app', 'Og\'irligi'),
+            'fever' => Yii::t('app', 'Isitma'),
+            'height' => Yii::t('app', 'Balandligi'),
+            'blood_pressure' => Yii::t('app', 'Qon bosimi'),
+            'complaint' => Yii::t('app', 'Shikoyat'),
+            'analiz_result' => Yii::t('app', 'Analiz natijasi'),
+            'diagnos' => Yii::t('app', 'Tashxis'),
         ];
     }
     //</editor-fold>

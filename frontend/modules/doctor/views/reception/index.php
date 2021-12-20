@@ -3,7 +3,7 @@
 use soft\helpers\Html;
 
 /* @var $this soft\web\View */
-/* @var $searchModel common\models\search\Reception */
+/* @var $searchModel common\models\search\ReceptionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Receptions');

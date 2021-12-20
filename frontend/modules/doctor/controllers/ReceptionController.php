@@ -4,13 +4,12 @@ namespace frontend\modules\doctor\controllers;
 
 use Yii;
 use common\models\Reception;
-use common\models\search\Reception as ReceptionSearch;
+use common\models\search\ReceptionSearch;
 use soft\web\SoftController;
-use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-class DoctorController extends SoftController
+class ReceptionController extends SoftController
 {
 
     /**
@@ -19,28 +18,22 @@ class DoctorController extends SoftController
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
-                'rules' => [
-                    [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['admin'],
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'delete' => ['POST'],
+                    'bulk-delete' => ['POST'],
                 ],
             ],
+            /*'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                ],
+            ]*/
         ];
     }
 
