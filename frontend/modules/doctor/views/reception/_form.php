@@ -27,6 +27,7 @@ use soft\widget\kartik\Form;
         'complaint:ckeditor',
         'analiz_result:ckeditor',
         'diagnos:ckeditor',
+        'reference:ckeditor',
     ]
 ]); ?>
 <div class="form-group">
