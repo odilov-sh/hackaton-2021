@@ -30,21 +30,18 @@ $pages = $dataProvider->pagination;
     'model' => $model,
     'panel' => $this->isAjax ? false : [],
     'attributes' => [
-        'firstname',
-        'lastname',
-        'middlename',
+        'fio',
         'date_of_birth:date',
         'passport',
-        'created_at',
-        'updated_at',
+//        'created_at',
+//        'updated_at',
     ],
 ]) ?>
 <div class="row">
     <div class="col-12">
         <div class="card card-primary">
             <div class="card-body">
-                <h5 class="text-center text-info"><i class="fas fa-clipboard-list"> Bemorning tahlil natijalari</i> <br><i
-                            style="margin-left: 10px" class="fas fa-user"> Bemor: <?= $model->fullname ?></i></h5>
+                <h5 class="text-center text-info"><i class="fas fa-clipboard-list"> Bemorning tahlil natijalari</i></h5>
             </div>
         </div>
 
