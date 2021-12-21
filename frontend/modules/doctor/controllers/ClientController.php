@@ -40,6 +40,9 @@ class ClientController extends SoftController
                     [
                         'allow' => true,
                         'roles' => ['@'],
+                        'matchCallback' => function () {
+                            return user()->isDoctor;
+                        },
                     ],
                 ],
             ]
@@ -239,9 +242,10 @@ class ClientController extends SoftController
             'dataProvider' => $dataProvider,
         ]);
     }
+
     public function actionWord($id)
     {
-        $section=Yii::$app->request->get('section');
+        $section = Yii::$app->request->get('section');
         $model = $this->findModel($id);
         return $model->downloadWord($section);
     }

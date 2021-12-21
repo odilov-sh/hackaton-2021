@@ -28,6 +28,7 @@ class Module extends \yii\base\Module
         $handler = $this->get('errorHandler');
         Yii::$app->set('errorHandler', $handler);
         $handler->register();
+
     }
 
 }
