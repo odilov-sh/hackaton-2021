@@ -31,15 +31,12 @@ $this->registerAjaxCrudAssets();
         ],
         'firstname',
         'lastname',
-        [
-            'attribute' => 'type_id',
-            'format' => 'raw',
-            'value' => 'typeName',
-//            'filter' => User::types()
-        ],
+        'region.name',
+        'district.name',
+        'polyclinic.name',
         [
             'attribute' => 'status',
-//            'filter' => User::statuses(),
+            'filter' => User::statuses(),
             'format' => 'raw',
             'value' => function ($model) {
                 /** @var User $model */
@@ -51,4 +48,3 @@ $this->registerAjaxCrudAssets();
         'actionColumn',
     ],
 ]); ?>
-    

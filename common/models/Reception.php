@@ -24,8 +24,6 @@ use yii\behaviors\TimestampBehavior;
  * @property int|null $updated_at
  *
  * @property User $client
- * @property User $createdBy0
- * @property User $updatedBy0
  */
 class Reception extends \soft\db\ActiveRecord
 {
@@ -84,7 +82,7 @@ class Reception extends \soft\db\ActiveRecord
     //</editor-fold>
 
     //<editor-fold desc="Relations" defaultstate="collapsed">
-    
+
     /**
     * @return \yii\db\ActiveQuery
     */
@@ -92,7 +90,7 @@ class Reception extends \soft\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'client_id']);
     }
-    
+
     /**
     * @return \yii\db\ActiveQuery
     */
@@ -107,6 +105,6 @@ class Reception extends \soft\db\ActiveRecord
     public function getFormattedDate(){
         return Yii::$app->formatter->asDate($this->created_at,'dd.MM.yyyy');
     }
-    
+
     //</editor-fold>
 }

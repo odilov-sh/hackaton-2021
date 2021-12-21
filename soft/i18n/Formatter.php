@@ -10,7 +10,7 @@ use Yii;
 class Formatter extends YiiFormatter
 {
 
-    public $nullDisplay = '<i class="text-danger">null</i>';
+    public $nullDisplay = '';
 
     //<editor-fold desc="Status" defaultstate="collapsed">
 

@@ -100,6 +100,11 @@ use yii\web\IdentityInterface;
  * @property string $password_expired [enum('N', 'Y')]
  * @property int $password_last_changed [timestamp]
  * @property int $password_lifetime [smallint(5) unsigned]
+ * @property-read Quarter $quarter
+ * @property-read Region $region
+ * @property-read District $district
+ * @property-read string $fio
+ * @property-read Polyclinic $polyclinic
  * @property string $account_locked [enum('N', 'Y')]
  *
  */
@@ -175,8 +180,11 @@ class User extends ActiveRecord implements IdentityInterface
             'phone' => "Telefon raqami",
             'status' => "Holati",
             'region_id' => 'Viloyat',
+            'region.name' => 'Viloyat',
             'district_id' => 'Tuman',
+            'district.name' => 'Tuman',
             'quarter_id' => 'Hudud',
+            'quarter.name' => 'Hudud',
             'date_of_birth' => "Tug'ilgan sanasi",
             'street' => "Ko'cha nomi",
             'house_number' => 'Uy raqami',
