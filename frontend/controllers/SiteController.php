@@ -74,7 +74,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->redirect(['site/login']);
     }
 
     /**
@@ -84,6 +84,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $this->layout = '_login';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -114,7 +115,7 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-        return $this->redirect('index');
+        return $this->redirect(['site/login']);
     }
 
 
