@@ -29,8 +29,8 @@ $this->registerAjaxCrudAssets();
 
         [
             'attribute' => 'created_at',
-            'format' => 'raw',
-            'value' => 'formattedDate',
+            'format' => 'datetime',
+//            'value' => 'formattedDate',
             'filter' => false,
         ],
         [

@@ -40,6 +40,11 @@ class ReceptionSearch extends Reception
             'pagination' => [
                 'defaultPageSize' => $defaultPageSize,
             ],
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC
+                ]
+            ]
         ]);
 
         $this->load($params);

@@ -47,7 +47,11 @@ class ReceptionController extends SoftController
     public function actionIndex()
     {
         $searchModel = new ReceptionSearch();
-        $dataProvider = $searchModel->search();
+        $query = Reception::find()
+            ->joinWith('client')
+            ->andWhere(['user.polyclinic_id' => user()->polyclinic_id ])
+        ;
+        $dataProvider = $searchModel->search($query);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
