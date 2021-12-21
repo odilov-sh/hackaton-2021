@@ -159,6 +159,13 @@ class ClientController extends SoftController
     {
         return $this->render('search');
     }
+
+    public function actionPechat($id)
+    {
+        $model = $this->findModel($id);
+        return $this->render('pechat', ['model' => $model]);
+    }
+
     public function actionPechatView($client_id)
     {
         $client = $this->findModel($client_id);
@@ -167,7 +174,6 @@ class ClientController extends SoftController
 
             throw new ForbiddenHttpException(Yii::t('app', 'The requested action does not exist.'));
         }
-
         return $this->render('pechat_view', [
             'client' => $client,
             'receptions' => $receptions
@@ -232,5 +238,11 @@ class ClientController extends SoftController
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    public function actionWord($id)
+    {
+        $section=Yii::$app->request->get('section');
+        $model = $this->findModel($id);
+        return $model->downloadWord($section);
     }
 }

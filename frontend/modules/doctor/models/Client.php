@@ -2,10 +2,15 @@
 
 namespace frontend\modules\doctor\models;
 
+use PhpOffice\PhpWord\TemplateProcessor;
+use yii\helpers\FileHelper;
 use common\models\User;
+use soft\helpers\ArrayHelper;
+use Yii;
 
 class Client extends User
 {
+    public $receptions;
 
     const SCENARIO_DOCTOR_FORM = 'doctorForm';
 
@@ -35,6 +40,25 @@ class Client extends User
         ];
         return $scenarios;
     }
+    public function getWordView($receptions)
+    {
+        $this->receptions = $receptions;
+        return Yii::$app->htmlToDoc->getHeader() . $this->getWordContent($this->receptions) . Yii::$app->htmlToDoc->getFooter();
+    }
 
+    public function getWordTemplateFile()
+    {
+        return '@common/word_templates/client.php';
+    }
 
+    public function getWordContent($receptions)
+    {
+        return Yii::$app->controller->renderPartial($this->getWordTemplateFile(), ['client' => $this, 'receptions' => $receptions]);
+    }
+
+    public function downloadWord($receptions)
+    {
+        $file = $this->getWordContent($receptions);
+        return Yii::$app->htmlToDoc->createDoc($file, '№ ' . $this->firstname, true);
+    }
 }

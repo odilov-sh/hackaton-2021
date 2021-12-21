@@ -9,7 +9,9 @@ return [
     'language' => 'uz',
     'name' => 'Smart Doctor',
     'components' => [
-
+        'htmlToDoc' => [
+            'class' => 'common\components\HtmlToDoc',
+        ],
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
             'itemFile' => '@common/rbac/items.php',
