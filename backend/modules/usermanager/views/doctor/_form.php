@@ -29,10 +29,10 @@ if (!$model->isNewRecord) {
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <!--        --><? //= $form->field($model, 'branch_id')->dropDownList(map(Branch::find()->all(), 'id', 'name')) ?>
         <?= Form::widget([
             'model' => $model,
             'form' => $form,
+            'columns' => 2,
             'attributes' => [
                 'username',
                 'firstname',
@@ -51,10 +51,10 @@ if (!$model->isNewRecord) {
                     'type' => Form::INPUT_DROPDOWN_LIST,
                     'items' => DoctorType::map(),
                     'options' => [
-                            'prompt' => '---'
+                        'prompt' => '---'
                     ]
                 ],
-                'polyclinic_id:select2'=>[
+                'polyclinic_id:select2' => [
                     'options' => [
                         'data' => Polyclinic::map(),
                     ]

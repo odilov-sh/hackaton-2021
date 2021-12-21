@@ -6,6 +6,7 @@ use backend\modules\regionmanager\models\District;
 use backend\modules\regionmanager\models\Region;
 use soft\helpers\ArrayHelper;
 use Yii;
+use common\models\User;
 
 /**
  * This is the model class for table "polyclinic".
@@ -17,10 +18,13 @@ use Yii;
  * @property string|null $address
  * @property string|null $map
  *
+ * @property-read Region $region
+ * @property-read District $district
  * @property User[] $users
  */
 class Polyclinic extends \soft\db\ActiveRecord
 {
+
     //<editor-fold desc="Parent" defaultstate="collapsed">
 
     /**

@@ -92,7 +92,6 @@ use yii\web\IdentityInterface;
  * @property string $x509_issuer [blob]
  * @property string $x509_subject [blob]
  * @property int $max_questions [int(11) unsigned]
- * @property int $polyclinic_id [int(11)]
  * @property int $max_updates [int(11) unsigned]
  * @property int $max_connections [int(11) unsigned]
  * @property int $max_user_connections [int(11) unsigned]
@@ -102,7 +101,6 @@ use yii\web\IdentityInterface;
  * @property int $password_last_changed [timestamp]
  * @property int $password_lifetime [smallint(5) unsigned]
  * @property string $account_locked [enum('N', 'Y')]
-
  *
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -183,7 +181,8 @@ class User extends ActiveRecord implements IdentityInterface
             'street' => "Ko'cha nomi",
             'house_number' => 'Uy raqami',
             'gender_id' => 'Jinsi',
-            'polyclinic_id' => 'Poliklinika nomi'
+            'polyclinic_id' => 'Poliklinika nomi',
+            'fio' => 'F.I.SH.'
         ];
     }
 
@@ -506,5 +505,13 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Polyclinic::class, [
             'id' => 'polyclinic_id'
         ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getFio()
+    {
+        return $this->lastname . ' ' . $this->firstname . ' ' . $this->middlename;
     }
 }

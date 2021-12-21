@@ -31,6 +31,9 @@ class ReceptionController extends SoftController
                     [
                         'allow' => true,
                         'roles' => ['@'],
+                        'matchCallback' => function () {
+                            return user()->isDoctor;
+                        },
                     ],
                 ],
             ]
